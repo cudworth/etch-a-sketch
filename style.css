@@ -3,27 +3,63 @@ body{
     height: 100vh;
 }
 
-.container{
+#bezel{
     display: inline-block;
-    width: 80vh;
-    height: 80vh;
-    background-color: blue;
+    margin: 8px;
+    padding: 84px;
+    border-radius: 42px;
+    border-style: solid;
+    border-width: 0px;
+    background-color: firebrick;
     }
 
+#screen{
+    background-color: beige;
+    font-size: 0px;
+}
+
 .row{
-    
+    font-size: 0px;
 }
 
 .cell{
     display: inline-block;
-    font-size: 10px;
-    text-align: center;
-    vertical-align: middle;
-    width: 42px;
-    height: 42px;
-    background-color: violet;
+    font-size: 0px;
 }
 
 .cell:hover{
     background-color: chartreuse;
+}
+
+.fill_000{
+    background-color: rgba(0,0,0,0.00);
+}
+
+.fill_033{
+    background-color: rgba(0,0,0,0.33);
+}
+
+.fill_066{
+    background-color: rgba(0,0,0,0.66);
+}
+
+.fill_100{
+    background-color: rgba(0,0,0,1.00);
+}
+
+h1{
+    color: gold;
+    text-shadow:1px 1px 2px black, -1px -1px 2px red;
+    font-size: 36px;
+    margin: 8px;
+}
+
+p{
+    margin: 8px;
+    color: gray;
+}
+
+button{
+    font-style: italic;
+    margin: 8px;
 }
