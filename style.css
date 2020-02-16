@@ -1,0 +1,29 @@
+body{
+    width: 100vw;
+    height: 100vh;
+}
+
+.container{
+    display: inline-block;
+    width: 80vh;
+    height: 80vh;
+    background-color: blue;
+    }
+
+.row{
+    
+}
+
+.cell{
+    display: inline-block;
+    font-size: 10px;
+    text-align: center;
+    vertical-align: middle;
+    width: 42px;
+    height: 42px;
+    background-color: violet;
+}
+
+.cell:hover{
+    background-color: chartreuse;
+}
