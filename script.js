@@ -2,15 +2,17 @@ function createCellArray(n, m){
 
     const cell_size = getCellSize(n, m);
 
-    const body = document.querySelector("body");
+    let body = document.querySelector("body");
 
     let bezel = document.createElement("div");
     bezel.id = "bezel";
 
-    let screen = document.createElement("div");
+    const screen = document.createElement("div");
     screen.id = "screen";
+    execFunctionOnEvent(screen, "mouseleave", mouseUp);
 
     bezel.appendChild(screen);
+
     body.appendChild(bezel);
 
     for (let i = 0; i < n; i++){
@@ -25,7 +27,10 @@ function createCellArray(n, m){
             cell.classList.add("fill_000")
             cell.setAttribute("style", `width: ${cell_size};height: ${cell_size}`);
             cell.id = i + "," + j;
-            addClassOnEvent(cell,"click","sketched");
+            execFunctionOnEvent(cell, "mousedown", mouseDown);
+            execFunctionOnEvent(cell, "mouseup", mouseUp);
+            execFunctionOnEvent(cell, "mousedown", darkenNode);
+            execFunctionOnEvent(cell, "mouseover", darkenNode);
             row.appendChild(cell);
         }
 
@@ -34,9 +39,18 @@ function createCellArray(n, m){
 
 };
 
+function mouseUp(){mouse_down = false};
+
+function mouseDown(){mouse_down = true};
+
 function darkenNode(node){
+
+    if (!mouse_down) return;
+
     classes = node.classList
+
     for (let i = 0; i < classes.length; i++) {
+
         switch(classes[i]){
             case "fill_000":
                 node.classList.add("fill_033");
@@ -53,20 +67,25 @@ function darkenNode(node){
                 node.classList.remove("fill_066");
                 break;
         
+            }
         }
-    }
 };
 
-function addClassOnEvent(element, event, classToAdd){
+function execFunctionOnEvent(element, event, function_to_exec){
     element.addEventListener(event, function (e) {
-        darkenNode(e.target);
-        //e.target.classList.add(classToAdd);
+        function_to_exec(e.target);
     });
 };
 
 function removeNode(selector){
     const node = document.querySelector(selector);
     node.parentNode.removeChild(node);
+};
+
+function getCellSize(n, m){
+    const max_width = (2 / 3) * window.innerWidth / m;
+    const max_height = (2 / 3) * window.innerHeight / n;
+    return Math.min(max_width, max_height) + "px";
 };
 
 button = document.querySelector("#shake");
@@ -79,11 +98,6 @@ button.addEventListener("click", function (e) {
     createCellArray(grid_size, grid_size);
 });
 
-function getCellSize(n, m){
-    const max_width = (2 / 3) * window.innerWidth / m;
-    const max_height = (2 / 3) * window.innerHeight / n;
-    return Math.min(max_width, max_height) + "px";
-};
-
+let mouse_down = false;
 
 createCellArray(16, 16); // Create starting array, 16 cells x 16 cells
